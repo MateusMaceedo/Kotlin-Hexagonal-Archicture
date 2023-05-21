@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566" # Porta para acesso aos serviços do LocalStack
+    environment:
+      - SERVICES=s3,sqs,lambda # Serviços do LocalStack que serão ativados
+      - DEFAULT_REGION=us-east-1 # Região padrão
+      - HTTP_PROXY=http://your_proxy_host:your_proxy_port # Configuração do proxy HTTP
+      - HTTPS_PROXY=http://your_proxy_host:your_proxy_port # Configuração do proxy HTTPS
+      - NO_PROXY=localhost,127.0.0.1 # Configuração de hosts excluídos do proxy
+      - AWS_ACCESS_KEY_ID=your_access_key_id
+      - AWS_SECRET_ACCESS_KEY=your_secret_access_key
+      - S3_ENDPOINT_URL=http://localstack:4566
+      - SQS_ENDPOINT_URL=http://localstack:4566
+      - LAMBDA_ENDPOINT_URL=http://localstack:4566
+    volumes:
+      - "./.localstack:/tmp/localstack" # Volume para persistência de dados do LocalStack
+
+  your_service:
+    image: your_service_image:tag
+    environment:
+      - AWS_ACCESS_KEY_ID=your_access_key_id
+      - AWS_SECRET_ACCESS_KEY=your_secret_access_key
+      - AWS_DEFAULT_REGION=us-east-1
+      - S3_ENDPOINT_URL=http://localstack:4566 # URL do endpoint S3 do LocalStack
+      - SQS_ENDPOINT_URL=http://localstack:4566 # URL do endpoint SQS do LocalStack
+      - LAMBDA_ENDPOINT_URL=http://localstack:4566 # URL do endpoint Lambda do LocalStack
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090" # Porta para acesso ao Prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus # Volume para configuração do Prometheus
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000" # Porta para acesso ao Grafana
+    environment:
+      - GF_AUTH_DISABLE_LOGIN_FORM=true # Desativa o formulário de login no Grafana
+    volumes:
+      - ./grafana:/var/lib/grafana # Volume para persistência de dados do Grafana
