@@ -1,6 +1,7 @@
 package com.o8k.poc.hexagonalarch.domain.entities
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class StudentEntityTest {
@@ -12,7 +13,7 @@ internal class StudentEntityTest {
         val student = StudentEntity("abc", "Student test")
 
         // Act and Assert
-        Assertions.assertTrue(student.isValid())
+        assertTrue(student.isValid())
     }
 
     @Test
@@ -21,6 +22,6 @@ internal class StudentEntityTest {
         val student = StudentEntity("abc", "")
 
         // Act and Assert
-        Assertions.assertFalse(student.isValid())
+        assertFalse(student.isValid())
     }
 }

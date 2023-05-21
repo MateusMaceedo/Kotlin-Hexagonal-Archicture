@@ -20,6 +20,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+	implementation("javax.inject:javax.inject:1")
+
 	implementation("com.h2database:h2")
 	implementation("org.liquibase:liquibase-core")
 
