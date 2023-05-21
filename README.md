@@ -1,5 +1,19 @@
 **Estrutura Hexagonal em Kotlin - Documentação**
 
+<p align="center">
+  <a href="https://github.com/hexagonkt/hexagon/actions">
+    <img
+      alt="GitHub Actions"
+      src="https://github.com/hexagonkt/hexagon/workflows/Release/badge.svg" />
+  </a>
+  <a href="https://hexagonkt.com/jacoco">
+    <img src="https://hexagonkt.com/img/coverage.svg" alt="Coverage" />
+  </a>
+  <a href="https://search.maven.org/search?q=g:com.hexagonkt">
+    <img src="https://hexagonkt.com/img/download.svg" alt="Maven Central Repository" />
+  </a>
+</p>
+
 # Introdução
 A estrutura hexagonal, também conhecida como arquitetura de ports and adapters, é um padrão arquitetural que visa separar as regras de negócio do sistema de suas dependências externas, como frameworks, bancos de dados e serviços externos. Essa separação facilita o desenvolvimento, o teste e a manutenção do sistema, além de permitir a substituição de componentes externos sem afetar a lógica de negócio.
 
