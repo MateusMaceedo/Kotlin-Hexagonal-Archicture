@@ -19,6 +19,6 @@ class StudentPersistenceIntegrationTest: BaseDatabaseIntegrationTest() {
         val savedStudent = studentPersistence.save(studentToSave)
 
         // Assert
-        //assertEquals(studentToSave, savedStudent)
+        assertEquals(studentToSave, savedStudent)
     }
 }

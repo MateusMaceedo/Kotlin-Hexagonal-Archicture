@@ -15,8 +15,7 @@ data class StudentModel(
 ) {
     fun toStudent() = StudentEntity(
         id = id,
-        name = name
-    )
+        name = name)
 }
 
 fun StudentEntity.toModel() = StudentModel(
