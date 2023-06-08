@@ -28,8 +28,8 @@ class StudentPersistenceIntegrationTest: BaseDatabaseIntegrationTest() {
         val studentToSave = StudentEntity("abc", "Student Test")
         studentPersistence.save(studentToSave)
 
-        val studentFoud = studentPersistence.findById("abc")
+        val studentFound = studentPersistence.findById("abc")
 
-        assertEquals(studentToSave, studentFoud)
+        assertEquals(studentToSave, studentFound)
     }
 }
