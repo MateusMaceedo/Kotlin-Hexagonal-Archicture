@@ -1,4 +1,4 @@
-package com.o8k.poc.hexagonalarch.domain.usecases.busca.impl
+package com.o8k.poc.hexagonalarch.adapter.usecases.busca.impl
 
 import com.o8k.poc.hexagonalarch.domain.entities.StudentEntity
 import com.o8k.poc.hexagonalarch.domain.exceptions.StudentNotFoundException

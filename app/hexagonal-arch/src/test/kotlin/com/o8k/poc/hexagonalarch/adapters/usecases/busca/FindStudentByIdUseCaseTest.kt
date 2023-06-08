@@ -1,8 +1,8 @@
-package com.o8k.poc.hexagonalarch.domain.usecases.busca
+package com.o8k.poc.hexagonalarch.adapters.usecases.busca
 
 import com.o8k.poc.hexagonalarch.domain.entities.StudentEntity
 import com.o8k.poc.hexagonalarch.domain.ports.output.StudentPersistenceInterface
-import com.o8k.poc.hexagonalarch.domain.usecases.busca.impl.FindStudentByIdUseCaseImpl
+import com.o8k.poc.hexagonalarch.adapter.usecases.busca.impl.FindStudentByIdUseCaseImpl
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
