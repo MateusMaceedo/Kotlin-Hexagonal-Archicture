@@ -18,10 +18,14 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	// JPA
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+	// TO USE NAME ANNOTATION
 	implementation("javax.inject:javax.inject:1")
 
+	// Database
 	implementation("com.h2database:h2")
 	implementation("org.liquibase:liquibase-core")
 

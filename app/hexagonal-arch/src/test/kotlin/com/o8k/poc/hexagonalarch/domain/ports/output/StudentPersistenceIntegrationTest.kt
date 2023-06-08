@@ -21,4 +21,15 @@ class StudentPersistenceIntegrationTest: BaseDatabaseIntegrationTest() {
         // Assert
         assertEquals(studentToSave, savedStudent)
     }
+
+    @Test
+    fun `should find a student by id`() {
+
+        val studentToSave = StudentEntity("abc", "Student Test")
+        studentPersistence.save(studentToSave)
+
+        val studentFoud = studentPersistence.findById("abc")
+
+        assertEquals(studentToSave, studentFoud)
+    }
 }
