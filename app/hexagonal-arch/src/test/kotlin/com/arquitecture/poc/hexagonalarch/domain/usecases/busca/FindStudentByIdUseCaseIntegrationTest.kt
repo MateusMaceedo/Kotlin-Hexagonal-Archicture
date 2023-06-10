@@ -1,4 +1,4 @@
-package com.arquitecture.poc.hexagonalarch.adapters.usecases.busca
+package com.arquitecture.poc.hexagonalarch.domain.usecases.busca
 
 import com.arquitecture.poc.hexagonalarch.domain.BaseDatabaseIntegrationTest
 import com.arquitecture.poc.hexagonalarch.domain.entities.StudentEntity
