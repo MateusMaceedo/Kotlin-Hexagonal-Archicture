@@ -4,7 +4,9 @@ import com.arquitecture.poc.hexagonalarch.domain.entities.StudentEntity
 import com.arquitecture.poc.hexagonalarch.domain.exceptions.InvalidStudentException
 import com.arquitecture.poc.hexagonalarch.domain.ports.input.CreateStudentUseCaseInterface
 import com.arquitecture.poc.hexagonalarch.domain.ports.output.StudentPersistenceInterface
+import javax.inject.Named
 
+@Named
 class CreateStudenteUseCaseImpl (
 
     private val studenteData: StudentPersistenceInterface
