@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgre:10.5
+    container_name: poc_hexa_postgre_10_5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=poc_hexa
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes:
+      - ~/localstack/poc_hexa/data/postgres:/var/lib/postgres/data
+    networks:
+      - sgbd-compose-network
+
+networks:
+  sgbd-compose-network:
+    driver: bridge
+

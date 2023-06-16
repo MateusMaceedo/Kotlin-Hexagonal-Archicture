@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+	// WEB
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
@@ -25,8 +26,9 @@ dependencies {
 	// TO USE NAME ANNOTATION
 	implementation("javax.inject:javax.inject:1")
 
-	// Database
+	// DB
 	implementation("com.h2database:h2")
+	implementation("org.postgresql:postgresql")
 	implementation("org.liquibase:liquibase-core")
 
 	implementation("io.arrow-kt:arrow-core:1.0.1")
