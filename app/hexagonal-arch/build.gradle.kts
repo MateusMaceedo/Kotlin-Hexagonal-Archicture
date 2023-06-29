@@ -11,11 +11,36 @@ group = "com.example.service.user"
 version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-repositories {
-	mavenCentral()
+sourceSets {
+	main {
+		java {
+			srcDirs("src/main/resources/avro", "scripts", "build/avro")
+		}
+	}
 }
 
+repositories {
+	mavenCentral()
+	jcenter()
+	maven {
+		url = uri("https://packages.confluent.io/maven/")
+	}
+}
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+
+	dependencies {
+		classpath("com.commercehub.gradle.plugin:gradle-avro-plugin:0.17.0")
+	}
+}
+
+apply(plugin = "com.commercehub.gradle.plugin.avro")
+
 dependencies {
+
 	// WEB
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -33,6 +58,10 @@ dependencies {
 
 	// AVRO
 	implementation("org.apache.avro:avro:1.10.2")
+	implementation("org.apache.avro:avro-compiler:1.10.2")
+
+	implementation("io.projectreactor.kafka:reactor-kafka:1.2.2.RELEASE")
+	implementation("io.confluent:kafka-avro-serializer:5.4.0")
 
 	// KAFKA
 	implementation("org.apache.kafka:kafka-clients:2.8.0")
@@ -60,4 +89,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs = listOf("-Xjsr305=strict")
+		jvmTarget = "1.8"
+	}
+
+	dependsOn("generateAvroJava")
 }
