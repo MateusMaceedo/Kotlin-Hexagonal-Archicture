@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "StudentDTO",
+  "namespace": "com.arquitecture.poc.hexagonalarch.domain.entities",
+  "fields" : [
+    {"name": "id", "type": "string"},
+    {"name": "name", "type": "string"}
+  ]
+}

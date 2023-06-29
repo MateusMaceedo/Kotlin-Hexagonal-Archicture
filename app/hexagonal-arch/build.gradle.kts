@@ -31,6 +31,15 @@ dependencies {
 	implementation("org.postgresql:postgresql")
 	implementation("org.liquibase:liquibase-core")
 
+	// AVRO
+	implementation("org.apache.avro:avro:1.10.2")
+
+	// KAFKA
+	implementation("org.apache.kafka:kafka-clients:2.8.0")
+
+	// SQS
+	implementation("software.amazon.awssdk:sqs:2.17.16")
+
 	implementation("io.arrow-kt:arrow-core:1.0.1")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
