@@ -1,0 +1,11 @@
+Resources:
+  MyScheduledAction:
+    Type: "AWS::ApplicationAutoScaling::ScheduledAction"
+    Properties:
+      ScalableTargetAction:
+        MinCapacity: 1
+        MaxCapacity: 10
+      Schedule: "cron(0 2 * * ? *)"  # Expressão cron para reiniciar o serviço às 2h da manhã
+      ScheduledActionName: "MyScheduledAction"
+      ServiceNamespace: "ecs"
+      ResourceId: "service/<cluster-name>/<service-name>"
