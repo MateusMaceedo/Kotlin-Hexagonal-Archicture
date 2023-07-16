@@ -113,6 +113,68 @@ Para subir os serviços do localstack, digitar o seguinte comando:
 docker-compose -f local-stack-docker-compose.yml up -d
 ```
 
+Configuração do ambiente
+Antes de iniciar o LocalStack, você precisará definir algumas variáveis de ambiente. Em seu terminal, execute os comandos a seguir:
+```bash
+export SERVICES=dynamodb
+export DEFAULT_REGION=us-east-1
+```
+
+Comandos para criar a tabela e inserir o operações que a app faz:
+```bash
+#### Cria Tabela que espera o json
+aws --endpoint-url=http://localhost:4566 dynamodb create-table --table-name TabelaJsonDynamo \
+  --attribute-definitions AttributeName=numero_proposta_credito_consignado_correspondente,AttributeType=S \
+  --key-schema AttributeName=numero_proposta_credito_consignado_correspondente,KeyType=HASH \
+  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+  --region us-east-1
+
+#### Inseri item tabela
+aws --endpoint-url=http://localhost:4566 dynamodb put-item --table-name TabelaJsonDynamo --item '{
+  "numero_proposta_credito_consignado_correspondente": {"S": "1234564"},
+  "ccb_controle_envio": {
+    "M": {
+      "dados_formalizacao": {
+        "M": {
+          "numero_proposta_credito_consignado_correspondente": {"S": "1234564"},
+          "status_formalizacao": {"S": "formalizacao"},
+          "data_hora": {"S": "2023-10-01T00:00:00"}
+        }
+      },
+      "notificacao": {
+        "M": {
+          "data_hora": {"S": "2023-10-01T00:00:00"},
+          "status_envio": {"S": "sucesso"}
+        }
+      },
+      "dados_cliente": {
+        "M": {
+          "codigo_identificacao_inquilino": {"S": "123124564"},
+          "codigo_identificacao_pessoa": {"S": "856446544645"}
+        }
+      }
+    }
+  }
+}' --region=us-east-1
+
+#### Consulta os items da tabela
+aws --endpoint-url=http://localhost:4566 dynamodb scan --table-name TabelaJsonDynamo --region=us-east-1
+```
+
+Consultando tabelas:
+```bash
+aws --endpoint-url=http://localhost:4566 dynamodb list-tables --region us-east-1
+```
+
+Inserindo um dado na tabela:
+```bash
+aws --endpoint-url=http://localhost:4566 dynamodb put-item --table-name TabelaJson --item '{
+  "Id": {"S": "numero_proposta_credito_consignado_correspondente"},
+  "Dados": {"S": "{\"ccb_controle_envio\": {\"dados_formalizacao\": {\"numero_proposta_credito_consignado_correspondente\": \"1234564\",\"status_formalizacao\": \"formalizacao\",\"data_hora\": \"2023-10-01T00:00:00\"},\"notificacao\": {\"data_hora\": \"2023-10-01T00:00:00\",\"status_envio\": \"sucesso\"},\"dados_cliente\": {\"codigo_identificacao_inquilino\": \"123124564\",\"codigo_identificacao_pessoa\": \"856446544645\"}}}"}
+}' --region=us-east-1
+
+```
+
 DynamoDB:
 ```json
 {
