@@ -91,11 +91,29 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
+val kotlinCompileTasks = tasks.withType(KotlinCompile::class.java)
+kotlinCompileTasks.configureEach {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		jvmTarget = "11"
 	}
+}
 
-	dependsOn("generateAvroJava")
+val avroSourceDir = file("${project.projectDir}/src/main/resources/avro")
+val avroOutputDir = file("${project.projectDir}/src/main/kotlin")
+
+tasks.register("generateAvro") {
+	inputs.dir(avroSourceDir)
+	outputs.dir(avroOutputDir)
+
+	doLast {
+		project.exec {
+			workingDir(project.projectDir)
+			commandLine("java", "-jar", configurations.compileClasspath.get().asPath, "idl", avroSourceDir.absolutePath)
+		}
+	}
+}
+
+tasks.named("bootRun").configure {
+	dependsOn("generateAvro")
 }
